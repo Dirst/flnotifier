@@ -24,7 +24,8 @@ gulp watch &
 
 ```
 gulp 
- или
+или
+
 gulp minCss
 gulp minJs
 gulp chosen_resources
