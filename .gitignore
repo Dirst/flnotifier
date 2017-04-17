@@ -1,2 +1,5 @@
 /nbproject/private/
 /nbproject
+/libs
+/node_modules
+npm-debug.log

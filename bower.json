@@ -1,0 +1,23 @@
+{
+  "name": "flnotifier",
+  "description": "FL.ru projects notifier",
+  "main": "",
+  "authors": [
+    "Dirst dirst.guy@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chosen": "^1.7.0",
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7"
+  }
+}
