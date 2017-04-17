@@ -23,6 +23,9 @@ gulp watch &
 Для единоразового обновления файлов запуск команд
 
 ```
+gulp 
+ или
 gulp minCss
 gulp minJs
+gulp chosen_resources
 ```
