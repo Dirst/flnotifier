@@ -4,7 +4,6 @@
 
 var projects_url = "https://www.fl.ru/projects/";
 
-
 $(function() {
   // Setup filter
   var select = "";
@@ -16,7 +15,7 @@ $(function() {
      });
     select += "</optgroup>";
   });
-  
+ 
   // Set up options.
   $("#categories").html(select);
   

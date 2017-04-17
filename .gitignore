@@ -3,3 +3,5 @@
 /libs
 /node_modules
 npm-debug.log
+/ext/css
+/ext/js
