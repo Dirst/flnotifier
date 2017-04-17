@@ -61,4 +61,4 @@ gulp.task("watch", function() {
   gulp.watch(paths.script, ['minJs']);
 });
 
-gulp.task('default', [ 'install_libs', 'minCss', 'minJs', 'watch' ]);
+gulp.task('default', [ 'install_libs', 'minCss', 'minJs' ]);
