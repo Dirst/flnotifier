@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Настройка FL уведомлений</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/chosen.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Настройки</h1>
+
+        <div class="form-group">
+          <label for="categories">Специализации</label>
+          <select  data-placeholder="Выберите одну или несколько специализаций" id="categories" class="form-control" type="select" multiple="true"></select>
+        </div>
+        <div class="form-group form-inline">
+          <label>Уведомлять каждые</label> <input id="notify-every" class="form-control" type="text"> <label>Мин</label>
+        </div>  
+        <div class="form-group form-inline">
+          <input id="desktop-check" class="form-control" type="checkbox"> <label for="desktop-check">Уведомления на рабочем столе</label>
+        </div>  
+      <button id="save" class="btn btn-success">Сохранить</button>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/filter_array.js"></script>
+    <script src="js/chosen.jquery.min.js"></script>
+    <script src="js/options.js"></script>
+  </body>
+</html>
