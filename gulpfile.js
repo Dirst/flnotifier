@@ -9,13 +9,17 @@ var uglify = require('gulp-uglify')
 var paths = {
   css:[
     './libs/bootstrap/dist/css/bootstrap.css',
-    './libs/chosen/chosen.css',
+    './libs/chosen/chosen.min.css',
     './src/css/*.css',
   ],
   script:[
     './libs/jquery/dist/jquery.js',
-    './libs/chosen/chosen.jquery.js',
+    './libs/chosen/chosen.jquery.min.js',
     './src/js/*.js',
+  ],
+  img:[
+    './libs/chosen/chosen-sprite.png',
+    './libs/chosen/chosen-sprite@2x.png'
   ]
 };
 
@@ -55,10 +59,15 @@ gulp.task('minJs', ['concatJs'], function() {
     .pipe(gulp.dest('ext/js/'))
 });
 
+gulp.task("chosen_resources", function() {
+  return gulp.src(paths.img)
+    .pipe(gulp.dest('ext/css'))
+});
+
 // Watch css and js.
 gulp.task("watch", function() {
   gulp.watch(paths.css, ['minCss']);
   gulp.watch(paths.script, ['minJs']);
 });
 
-gulp.task('default', [ 'install_libs', 'minCss', 'minJs' ]);
+gulp.task('default', [ 'install_libs', 'minCss', 'minJs', 'chosen_resources']);
