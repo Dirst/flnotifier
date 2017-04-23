@@ -83,9 +83,13 @@ $(function() {
       status.text('Опции сохранены');
       status.addClass("opened");
       
+      // Clear jobs list.
+//      chrome.storage.local.clear();
+      
       // Clear and create new alarm for jobs check.
-      chrome.alarms.clear("flru_check");
+      chrome.alarms.clear("flru_check"); 
       chrome.alarms.create("flru_check", {periodInMinutes: parseInt($("#notify-every").val())});
+      
       
       setTimeout(function() {
         status.text('');

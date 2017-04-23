@@ -6,7 +6,7 @@
     "128": "128x128.png"
   },
   "permissions": [
-    "https://www.fl.ru/*",
+    "http://flapi.bestluck.pw/",
     "notifications",
     "storage",
     "alarms"
