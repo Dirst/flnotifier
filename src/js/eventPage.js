@@ -6,7 +6,8 @@
 
 var api_flru_projects = "http://flapi.bestluck.pw/";
 var apikey = "zxcew23sdcxv23xc23k4j23h4j23h4j23b423b23423i983242xc3023u0";
-var max_jobs = 40;
+var max_jobs = 10;
+
 /**
  * Add alarm listener.
  */
@@ -35,7 +36,7 @@ chrome.alarms.onAlarm.addListener(function(Alarm) {
         cost_from: items.budget,
         currency_id: items.currency
       }, function(data) {
-        __set_up_jobs(data);
+        __set_up_jobs(data, items);
       });
 
     });
@@ -48,8 +49,7 @@ chrome.alarms.onAlarm.addListener(function(Alarm) {
  *
  * @param jobs
  */
-function __set_up_jobs(jobs) {
-  console.log("ok");
+function __set_up_jobs(jobs, options) {
   // Get jobs list from local storage.
   chrome.storage.local.get(function(jobs_list) {
     // For each job in list.
@@ -78,19 +78,19 @@ function __set_up_jobs(jobs) {
       }
     });
     
+    // Clear before set.
+    chrome.storage.local.clear();
+    
     // Add jobs to local storage.
     chrome.storage.local.set(jobs_list, function() {
-      console.log(jobs_list);
-      console.log(Object.keys(jobs).length);
-      console.log(Object.keys(jobs_list).length);
-      
       // Create notification on new jobs.
-      if (Object.keys(jobs).length > 0) {
+      if (Object.keys(jobs).length > 0 && options.desktop) {
+        var last_key = Object.keys(jobs).length - 1;
         chrome.notifications.create(null, {
           type: chrome.notifications.TemplateType.BASIC,
           iconUrl: '128x128.png',
           title: 'Появилось (' + Object.keys(jobs).length + ') новых работ',
-          message: jobs[Object.keys(jobs)[0]].title + "с бюджетом " + jobs[Object.keys(jobs)[0]].budget + " и др.",
+          message: jobs[Object.keys(jobs)[last_key]].title + " с бюджетом " + jobs[Object.keys(jobs)[last_key]].budget + " и др.",
           requireInteraction: true
         });
       }

@@ -111,7 +111,7 @@ gulp.task('concatJs', function() {
  */
 gulp.task('minJs', ['concatJs'], function() {
   return gulp.src('ext/js/*.js')
-    .pipe(uglify())
+//    .pipe(uglify())
     .pipe(gulp.dest('ext/js/'))
 });
 

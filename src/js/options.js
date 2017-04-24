@@ -84,7 +84,7 @@ $(function() {
       status.addClass("opened");
       
       // Clear jobs list.
-//      chrome.storage.local.clear();
+      chrome.storage.local.clear();
       
       // Clear and create new alarm for jobs check.
       chrome.alarms.clear("flru_check"); 
