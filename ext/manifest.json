@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Уведомитель проектов FL.RU",
+  "short_name": "Flgrabber",
   "version": "1.0",
   "icons": {
     "128": "128x128.png"
