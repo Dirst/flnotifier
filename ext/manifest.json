@@ -3,6 +3,7 @@
   "name": "Уведомитель проектов FL.RU",
   "short_name": "Flgrabber",
   "version": "1.0",
+  "author": "Dirst",
   "icons": {
     "128": "128x128.png"
   },
