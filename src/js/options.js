@@ -88,8 +88,7 @@ $(function() {
       
       // Clear and create new alarm for jobs check.
       chrome.alarms.clear("flru_check"); 
-      chrome.alarms.create("flru_check", {periodInMinutes: parseInt($("#notify-every").val())});
-      
+      chrome.alarms.create("flru_check", {when: Date.now() + 100, periodInMinutes: parseInt($("#notify-every").val())});
       
       setTimeout(function() {
         status.text('');

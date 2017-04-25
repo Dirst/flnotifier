@@ -32,8 +32,14 @@ var paths = {
     './src/js/filter_array.js',
     './src/js/options.js',
   ],
+  css_popup: [
+    './src/css/popup.css',
+  ],
   script_event_page: [
     './src/js/eventPage.js',
+  ],
+  script_popup: [
+    './src/js/popup.js'
   ],
   img:[
     './libs/chosen/chosen-sprite.png',
@@ -79,8 +85,10 @@ function concatJs(stream, output_name) {
 gulp.task('concatCss', function() {
   var options = concatCss(gulp.src(paths.css_options), 'options');
   var common  = concatCss(gulp.src(paths.css_common), 'common');
+  var popup  = concatCss(gulp.src(paths.css_popup), 'popup');
+
   
-  return merge(common, options);
+  return merge(common, options, popup);
 });
 
 /**
@@ -102,8 +110,9 @@ gulp.task('concatJs', function() {
   var options = concatJs(gulp.src(paths.script_options), 'options');
   var common = concatJs(gulp.src(paths.script_common), 'common');
   var event_page = concatJs(gulp.src(paths.script_event_page), 'eventPage');
+  var popup = concatJs(gulp.src(paths.script_popup), 'popup');
   
-  return merge(common, options, event_page);
+  return merge(common, options, event_page, popup);
 });
 
 /**
@@ -111,7 +120,7 @@ gulp.task('concatJs', function() {
  */
 gulp.task('minJs', ['concatJs'], function() {
   return gulp.src('ext/js/*.js')
-//    .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('ext/js/'))
 });
 

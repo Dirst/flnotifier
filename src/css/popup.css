@@ -1,0 +1,40 @@
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #6fda44;
+  z-index: 50;
+  color: #fff;
+  padding-left: 22px;
+}
+h1{
+  font-size:4.5em;
+  letter-spacing: -3px;
+  font-family: calibri;
+  line-height: 1;
+    padding-bottom: 4px;
+}
+h1 span{
+  font-size: 0.8em;
+  color: #008e00;
+}
+.container{
+  min-width:550px;
+  padding:40px;
+  margin-top:40px;
+}
+h3,h4,h5,h1{
+  margin:0;
+}
+h4 a,h4 a:hover{color: #6fda44;}
+.one-item{
+  padding-bottom:10px;
+  border-bottom: 1px solid #d4d4d4;
+  margin-bottom:10px;
+}
+.one-item:last-child{
+  border:none;
+  padding-bottom:0;
+  margin-bottom:0;
+}
+.one-item .col-xs-4{text-align:right}
