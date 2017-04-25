@@ -56,6 +56,7 @@ function __set_up_jobs(jobs, options) {
     Object.keys(jobs_list).forEach(function(job_id, i, arr) {
       // Remove job that already exists. 
       if (typeof(jobs[job_id]) != "undefined") {
+        jobs_list[job_id].time = jobs[job_id].time;
         delete jobs[job_id];
       }
     });
