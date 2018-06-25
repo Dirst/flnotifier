@@ -9,9 +9,16 @@ var apikey = "zxcew23sdcxv23xc23k4j23h4j23h4j23b423b23423i983242xc3023u0";
 var max_jobs = 30;
 
 /**
+ * Add notification clicked listener.
+ */
+chrome.notifications.onClicked.addListener(function (id) {
+  chrome.notifications.clear(id);
+});
+
+/**
  * Add alarm listener.
  */
-chrome.alarms.onAlarm.addListener(function(Alarm) {
+chrome.alarms.onAlarm.addListener(function (Alarm) {
   if (Alarm.name == 'flru_check') {
     // Get token.
     chrome.storage.sync.get(function(items) {
