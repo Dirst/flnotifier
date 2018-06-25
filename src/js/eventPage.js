@@ -66,30 +66,30 @@ chrome.alarms.onAlarm.addListener(function(Alarm) {
           }
         }
         fields.pf_categofy[1] = categofy_1;
-        console.log(fields);
-        // Retirieve projects.
-        $.ajax("https://example.com/v2/login", {
-          method: 'POST',
-          data: fields,
-          crossDomain: true,
-          xhrFields: { withCredentials: true },
-          success: function(data) {
-            // Parse jobs.
-            var jobs = __parse_jobs(data);
-            console.log(jobs);
-            __set_up_jobs(jobs, items);
-          }
-        });
-//        $.post(
-//          flru_url,
-//          fields,
-//          function(data) {
+//        console.log(fields);
+//        // Retirieve projects.
+//        $.ajax("https://example.com/v2/login", {
+//          method: 'POST',
+//          data: fields,
+//          crossDomain: true,
+//          xhrFields: { withCredentials: true },
+//          success: function(data) {
 //            // Parse jobs.
 //            var jobs = __parse_jobs(data);
 //            console.log(jobs);
 //            __set_up_jobs(jobs, items);
 //          }
-//        );
+//        });
+        $.post(
+          flru_url,
+          fields,
+          function(data) {
+            // Parse jobs.
+            var jobs = __parse_jobs(data);
+            console.log(jobs);
+            __set_up_jobs(jobs, items);
+          }
+        );
       });
     });
     
