@@ -4,7 +4,7 @@
  * Event page. Here extension is gonna call FL.ru and parse new data.
  */
 
-var api_flru_projects = "http://flapi.bestluck.pw/";
+var api_flru_projects = "http://flapi.guitarchik.ru/";
 var apikey = "zxcew23sdcxv23xc23k4j23h4j23h4j23b423b23423i983242xc3023u0";
 var max_jobs = 30;
 
