@@ -4,8 +4,8 @@
  * Event page. Here extension is gonna call FL.ru and parse new data.
  */
 
-var api_flru_projects = "http://flapi.bestluck.pw/";
-var apikey = "zxcew23sdcxv23xc23k4j23h4j23h4j23b423b23423i983242xc3023u0";
+var flru_url = "https://www.fl.ru/projects";
+//var apikey = "zxcew23sdcxv23xc23k4j23h4j23h4j23b423b23423i983242xc3023u0";
 var max_jobs = 30;
 
 /**
@@ -26,23 +26,122 @@ chrome.alarms.onAlarm.addListener(function(Alarm) {
           specialities.push(item);
         }
       });
-
-      // Get flru projects. 
-      $.get(api_flru_projects, {
-        APIKEY: apikey,
-        'spec_categories[]': specialities,
-        'common_categories[]': common_specialities,
-        kind: 1,
-        cost_from: items.budget,
-        currency_id: items.currency
-      }, function(data) {
-        __set_up_jobs(data, items);
+      
+      // Retirieve jobs start.
+      $.get(flru_url, function(data) {
+        
+        // Get fl.ru token.
+        var pattern = /(var _TOKEN_KEY = \')(.+)(\';)/
+        var match = data.match(pattern);
+        var token = match[2];
+        
+        // Get fl.ru jobs.
+        var fields = {
+          'action': 'postfilter',
+          'kind': 1,
+          'pf_cost_from': items.budget,
+          "currency_text_db_id": items.currency,
+          'pf_currency': items.currency,
+          'u_token_key': token
+        };
+        
+        // Add common categories
+        fields.pf_categofy = new Array();
+        var categofy_0 = {};
+        var categofy_1 = {};
+        
+        for (var key in common_specialities) {
+          if (common_specialities.hasOwnProperty(key)) {
+            var objectKey = common_specialities[key];
+            categofy_0 = {objectKey: 0};
+          }
+        }
+        fields.pf_categofy[0] = categofy_0;
+        
+        // Add special categories
+        for (var key in specialities) {
+          if (specialities.hasOwnProperty(key)) {
+            var objectKey = specialities[key];
+            categofy_1 = {objectKey: 1};
+          }
+        }
+        fields.pf_categofy[1] = categofy_1;
+        console.log(fields);
+        // Retirieve projects.
+        $.ajax("https://example.com/v2/login", {
+          method: 'POST',
+          data: fields,
+          crossDomain: true,
+          xhrFields: { withCredentials: true },
+          success: function(data) {
+            // Parse jobs.
+            var jobs = __parse_jobs(data);
+            console.log(jobs);
+            __set_up_jobs(jobs, items);
+          }
+        });
+//        $.post(
+//          flru_url,
+//          fields,
+//          function(data) {
+//            // Parse jobs.
+//            var jobs = __parse_jobs(data);
+//            console.log(jobs);
+//            __set_up_jobs(jobs, items);
+//          }
+//        );
       });
-
     });
     
   }
 });
+
+/**
+ * Parse jobs from html.
+ *
+ * @param {string} html
+ * 
+ * @returns {array}
+ *   Array of jobs objects.
+ */
+function __parse_jobs(html) {
+  var jobs = new Array();
+  $("#projects-list .b-post", html).each(function(index, value) {
+    // Set title, id, link.
+    var id = $(value).attr("id").replace("project-item", '');
+    jobs[id] = {
+      id: id,
+      title: $(value).find("h2 a").text().trim().replace(/\s+/,' '),
+      link: $(value).find("h2 a").attr("href")
+    };
+
+    // Budget.
+    var pattern = /(document.write\(')(.+)('\))/;
+    var match = $(value).find('script').html().match(pattern);
+    if (typeof match[2] !== 'undefined') {
+      jobs[id].budget = $(match[2]).text().replace(/\s+/,' ');
+    }
+    
+     // Description
+     var match = $($(value).find('script')[1]).html().match(pattern);
+     if (typeof match[2] !== 'undefined') {
+       jobs[id].description = $(match[2]).text().replace(/\s+/,' ');
+     }
+     
+     // Parse publish time.
+    var match = $($(value).find('script')[2]).html().match(pattern);
+    if (typeof match[2] !== 'undefined') {
+      jobs[id].type = $(match[2]).find(".b-layout__txt_inline-block").text().replace(/\s+/,' ');
+      pattern = /(b-layout__txt_inline-block\">)([^\<]+)(\<\/span\>)([^\<]+)/;
+      match = match[2].match(pattern);
+      if (typeof match[4] !== 'undefined') {
+        jobs[id].time = $("<div>" + match[4] + "</div>").text().replace(/\s+/,' ');
+      }
+    }
+  });
+  
+  return jobs;
+}
 
 /**
  * Set up jobs to local storage.

@@ -2,13 +2,13 @@
   "manifest_version": 2,
   "name": "Уведомитель проектов FL.RU",
   "short_name": "Flgrabber",
-  "version": "1.0",
+  "version": "2.0",
   "author": "Dirst",
   "icons": {
     "128": "128x128.png"
   },
   "permissions": [
-    "http://flapi.bestluck.pw/",
+    "https://www.fl.ru/",
     "notifications",
     "storage",
     "alarms"

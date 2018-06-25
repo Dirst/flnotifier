@@ -12,7 +12,8 @@ h1{
   letter-spacing: -3px;
   font-family: calibri;
   line-height: 1;
-    padding-bottom: 4px;
+  padding-bottom: 4px;
+  font-family: sans-serif;
 }
 h1 span{
   font-size: 0.8em;
