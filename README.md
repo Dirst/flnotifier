@@ -11,22 +11,23 @@
  ```
  npm i
  ```
++ Установить bower глобально
+ ```
+ npm install -g bower
+ ```
+
 + Запустить в папке проекта команду
 ```
-gulp
+gulp minCss
+gulp minJs
+gulp chosen_resources
 ```
 
 Для запуска наблюдения за файлами в папке src необходимо выполнить команду
 ```
-gulp watch
+node_modules/gulp/gulp.js watch
 ```
 Для единоразового обновления файлов запуск команд
-
-```
-gulp
-```
-
-или
 
 ```
 gulp minCss

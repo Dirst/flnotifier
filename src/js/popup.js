@@ -10,10 +10,13 @@ $(function() {
   
   // Render jobs
   chrome.storage.local.get(function(jobs) {
-    console.log(jobs);
-    Object.keys(jobs).forEach(function(job_id) {
-      $("body .container").prepend(renderTemplate('popup-item', jobs[job_id]));
-    });
+    if (Object.keys(jobs).length == 0) {
+        $("body .container").prepend("Пожалуйста, настройте FLGrabber для получения первых уведомлений");
+    } else {
+        Object.keys(jobs).forEach(function(job_id) {
+        $("body .container").prepend(renderTemplate('popup-item', jobs[job_id]));
+        });
+    }
   });
 });
 
